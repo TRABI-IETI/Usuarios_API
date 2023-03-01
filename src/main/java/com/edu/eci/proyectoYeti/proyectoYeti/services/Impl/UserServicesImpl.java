@@ -1,7 +1,9 @@
 package com.edu.eci.proyectoYeti.proyectoYeti.services.Impl;
 
 import com.edu.eci.proyectoYeti.proyectoYeti.model.User;
+import com.edu.eci.proyectoYeti.proyectoYeti.persistence.UserRepository;
 import com.edu.eci.proyectoYeti.proyectoYeti.services.UserServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,11 +11,14 @@ import java.util.*;
 @Service
 public class UserServicesImpl implements UserServices {
 
+    @Autowired
+    UserRepository userRepository;
+
     Map<String, User> users = new HashMap<>();
 
     @Override
     public List<User> getAllUsers() {
-        return new ArrayList<>(users.values());
+        return userRepository.findAll();
     }
 
     @Override
