@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -29,7 +30,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user){
-        User newUser = userServices.saveUser(user);
+        Optional<User> newUser = userServices.saveUser(user);
         URI createUserURI = URI.create("");
         return ResponseEntity.created(createUserURI).body(newUser);
     }

@@ -27,11 +27,9 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public User saveUser(User user) {
-        if(getById(user.getId()).isEmpty()){
-            users.put(user.getId(),user);
-        }
-        return users.get(user.getId());
+    public Optional<User> saveUser(User user) {
+        userRepository.save(user);
+        return userRepository.findById(user.getId());
     }
 
     @Override
