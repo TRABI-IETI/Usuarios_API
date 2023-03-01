@@ -45,10 +45,10 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
-    @Overrides
+    @Override
     public void deleteUser(String id) {
         if(userRepository.existsById(id)){
-            userRepository.delete(id);
+            userRepository.deleteById(id);
         }else{
             throw new UserException(id);
         }
