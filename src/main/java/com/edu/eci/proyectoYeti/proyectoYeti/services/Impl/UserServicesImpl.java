@@ -1,5 +1,6 @@
 package com.edu.eci.proyectoYeti.proyectoYeti.services.Impl;
 
+import com.edu.eci.proyectoYeti.proyectoYeti.exceptions.UserException;
 import com.edu.eci.proyectoYeti.proyectoYeti.model.User;
 import com.edu.eci.proyectoYeti.proyectoYeti.persistence.UserRepository;
 import com.edu.eci.proyectoYeti.proyectoYeti.services.UserServices;
@@ -33,10 +34,15 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public User updateUser(User newUser, String id) {
-        User oldUser = users.get(id);
-        oldUser.update(newUser);
-        return users.get(id);
+    public Optional<User> updateUser(User newUser, String id) {
+        if(userRepository.existsById(id)){
+            Optional<User> odlUser = userRepository.findById(id);
+            odlUser.get().update(newUser);
+            userRepository.save(odlUser.get());
+            return userRepository.findById(id);
+        }else {
+            throw new UserException(id);
+        }
     }
 
     @Override

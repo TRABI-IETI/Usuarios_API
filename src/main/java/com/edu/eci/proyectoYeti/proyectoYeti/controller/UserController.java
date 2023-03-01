@@ -37,9 +37,7 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") String id){
-        User optionalUser = userServices.getById(id).orElseThrow(()->new UserException(id));
-        User updateUser = userServices.updateUser(user,id);
-        userServices.saveUser(optionalUser);
+        User updateUser = userServices.updateUser(user,id).orElseThrow(() -> new UserException(id));
         return ResponseEntity.ok(updateUser);
     }
 

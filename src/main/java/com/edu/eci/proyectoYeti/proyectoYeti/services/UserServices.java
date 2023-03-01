@@ -12,7 +12,7 @@ public interface UserServices {
 
     Optional<User> saveUser(User user);
 
-    User updateUser(User user, String id);
+    Optional<User> updateUser(User user, String id);
 
     void deleteUser(String id);
 }
