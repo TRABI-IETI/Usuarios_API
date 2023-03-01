@@ -43,7 +43,6 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") String id){
-        User user = userServices.getById(id).orElseThrow(()->new UserException(id));
         userServices.deleteUser(id);
         return ResponseEntity.ok().build();
     }
