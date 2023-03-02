@@ -2,6 +2,7 @@ package com.edu.eci.proyectoYeti.proyectoYeti.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Document(collection = "user_collection")
 public class User {
@@ -15,7 +16,9 @@ public class User {
     private String nationality;
     private char sex;
 
-    public User(String id, String name, String mail, String phone, byte age, String nationality, char sex) {
+    private String passwordHash;
+
+    public User(String id, String name, String mail, String phone, byte age, String nationality, char sex, String passwordHash) {
         this.id = id;
         this.name = name;
         this.mail = mail;
@@ -23,6 +26,8 @@ public class User {
         this.age = age;
         this.nationality = nationality;
         this.sex = sex;
+        this.passwordHash = passwordHash;
+        passwordHash = BCrypt.hashpw( passwordHash, BCrypt.gensalt() );
     }
 
     public User() {
@@ -89,5 +94,17 @@ public class User {
         this.mail = user.getMail();
         this.phone = user.getPhone();
         this.sex = user.getSex();
+        if ( this.getPasswordHash() != null )
+        {
+            this.passwordHash = BCrypt.hashpw( this.getPasswordHash(), BCrypt.gensalt() );
+        }
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
