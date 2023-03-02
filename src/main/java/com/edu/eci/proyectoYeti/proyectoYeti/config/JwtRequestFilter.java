@@ -1,5 +1,6 @@
 package com.edu.eci.proyectoYeti.proyectoYeti.config;
 
+import com.edu.eci.proyectoYeti.proyectoYeti.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -44,14 +45,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws( token );
                 Claims claimsBody = claims.getBody();
                 String subject = claimsBody.getSubject();
-                List<String> roles  = claims.getBody().get( "KEY" , ArrayList.class);
-                SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(subject, token, "ADMIN"));
-//                if (roles == null) {
-//                    response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token roles");
-//                } else {
-//                    SecurityContextHolder.getContext().setAuthentication( new TokenAuthentication( token, subject, roles));
-//
-//                }
+                List<String> roles  = new ArrayList<>();
+                roles.add("ADMIN");roles.add("USER");
+//                SecurityContextHolder.getContext().setAuthentication(new TestingAuthenticationToken(subject, token, "ADMIN"));
+                if (roles == null) {
+                    response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token roles");
+                } else {
+                    SecurityContextHolder.getContext().setAuthentication( new TokenAuthentication( token, subject, roles));
+
+                }
+                System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
                 request.setAttribute( "claims", claimsBody);
                 request.setAttribute( "jwtUserId", subject);
                 request.setAttribute("jwtUserRoles", roles);

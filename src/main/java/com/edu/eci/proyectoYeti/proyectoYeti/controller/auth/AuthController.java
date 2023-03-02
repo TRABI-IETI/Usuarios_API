@@ -38,7 +38,7 @@ public class AuthController
     public TokenDto login( @RequestBody LoginDto loginDto )
     {
         List<User> users = userService.getAllUsers();
-        System.out.println(users.get(0).getName());
+//        System.out.println(users.get(0).getName());
         User newUser = new User();
         for(User user: users){
             if(Objects.equals(user.getMail(), loginDto.getEmail())){
@@ -61,7 +61,7 @@ public class AuthController
     {
         return Jwts.builder()
                 .setSubject( user.getId() )
-                .claim( CLAIMS_ROLES_KEY, "ADMIN" )
+                .claim( CLAIMS_ROLES_KEY, "USER" )
                 .setIssuedAt(new Date() )
                 .setExpiration( expirationDate )
                 .signWith( SignatureAlgorithm.HS256, secret )

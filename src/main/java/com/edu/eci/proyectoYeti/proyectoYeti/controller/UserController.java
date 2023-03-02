@@ -31,9 +31,8 @@ public class UserController {
     }
 
     @PostMapping
-//    @RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<?> createUser(@RequestBody UserDto user){
-        System.out.println(user.getPassword());
         User newUser = userServices.saveUser(user);
         URI createUserURI = URI.create("");
         return ResponseEntity.created(createUserURI).body(newUser);

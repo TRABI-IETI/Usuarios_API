@@ -4,6 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Document(collection = "user_collection")
 public class User {
 
@@ -15,8 +19,8 @@ public class User {
     private byte age;
     private String nationality;
     private char sex;
-
     private String passwordHash;
+//    List<RoleEnum> roles;
 
 
     public User(UserDto userDto){
@@ -27,6 +31,7 @@ public class User {
         this.age = userDto.getAge();
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
+//        this.roles = new ArrayList<>( Collections.singleton( RoleEnum.USER ) );
 
     }
 
@@ -88,6 +93,10 @@ public class User {
     public void setSex(char sex) {
         this.sex = sex;
     }
+
+//    public List<RoleEnum> getRoles() {
+//        return roles;
+//    }
 
     public void update(UserDto userDto){
         this.mail = userDto.getMail();
