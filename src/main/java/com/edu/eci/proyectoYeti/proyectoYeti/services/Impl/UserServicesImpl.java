@@ -24,7 +24,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Optional<User> getById(String id) {
-        return Optional.ofNullable(users.get(id));
+        return Optional.ofNullable(userRepository.findById(id).orElseThrow(()-> new UserException(id)));
     }
 
     @Override
