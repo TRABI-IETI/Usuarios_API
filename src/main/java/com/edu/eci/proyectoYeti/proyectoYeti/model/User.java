@@ -3,7 +3,7 @@ package com.edu.eci.proyectoYeti.proyectoYeti.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "user_collection")
 public class User {
 
     @Id
