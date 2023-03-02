@@ -1,6 +1,7 @@
 package com.edu.eci.proyectoYeti.proyectoYeti.services;
 
 import com.edu.eci.proyectoYeti.proyectoYeti.model.User;
+import com.edu.eci.proyectoYeti.proyectoYeti.model.UserDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,9 @@ public interface UserServices {
 
     Optional<User> getById(String id);
 
-    Optional<User> saveUser(User user);
+    User saveUser(UserDto user);
 
-    Optional<User> updateUser(User user, String id);
+    Optional<User> updateUser(UserDto user, String id);
 
     void deleteUser(String id);
 }

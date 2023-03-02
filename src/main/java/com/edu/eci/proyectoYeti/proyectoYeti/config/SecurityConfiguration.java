@@ -22,10 +22,11 @@ public class SecurityConfiguration
     @Override
     protected void configure(HttpSecurity http)
             throws Exception {
-        http.addFilterBefore(jwtRequestFilter,
-                BasicAuthenticationFilter.class).cors().and().csrf().disable().authorizeRequests().antMatchers(
-                HttpMethod.GET, "/v1/health").permitAll().antMatchers(HttpMethod.POST,
-                "/v1/auth").permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(
-                SessionCreationPolicy.STATELESS);
+        http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST,"/v1/auth").permitAll().antMatchers(HttpMethod.GET, "/users").permitAll()
+                .anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.addFilterBefore(jwtRequestFilter,
+//                BasicAuthenticationFilter.class).cors().and().csrf().disable().authorizeRequests().antMatchers(
+//                HttpMethod.GET, "/users").permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(
+//                SessionCreationPolicy.STATELESS);
     }
 }

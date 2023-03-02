@@ -2,6 +2,7 @@ package com.edu.eci.proyectoYeti.proyectoYeti.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Document(collection = "user_collection")
 public class User {
@@ -15,14 +16,18 @@ public class User {
     private String nationality;
     private char sex;
 
-    public User(String id, String name, String mail, String phone, byte age, String nationality, char sex) {
-        this.id = id;
-        this.name = name;
-        this.mail = mail;
-        this.phone = phone;
-        this.age = age;
-        this.nationality = nationality;
-        this.sex = sex;
+    private String passwordHash;
+
+
+    public User(UserDto userDto){
+        this.mail = userDto.getMail();
+        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
+        this.name = userDto.getName();
+        this.phone = userDto.getPhone();
+        this.age = userDto.getAge();
+        this.nationality = userDto.getNationality();
+        this.sex = userDto.getSex();
+
     }
 
     public User() {
@@ -84,10 +89,24 @@ public class User {
         this.sex = sex;
     }
 
-    public void update(User user){
-        this.name = user.getName();
-        this.mail = user.getMail();
-        this.phone = user.getPhone();
-        this.sex = user.getSex();
+    public void update(UserDto userDto){
+        this.mail = userDto.getMail();
+        this.name = userDto.getName();
+        this.phone = userDto.getPhone();
+        this.age = userDto.getAge();
+        this.nationality = userDto.getNationality();
+        this.sex = userDto.getSex();
+        if ( userDto.getPassword() != null ){
+            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
+        }
+
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
