@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -29,22 +30,19 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user){
-        User newUser = userServices.saveUser(user);
+        Optional<User> newUser = userServices.saveUser(user);
         URI createUserURI = URI.create("");
         return ResponseEntity.created(createUserURI).body(newUser);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") String id){
-        User optionalUser = userServices.getById(id).orElseThrow(()->new UserException(id));
-        User updateUser = userServices.updateUser(user,id);
-        userServices.saveUser(optionalUser);
+        User updateUser = userServices.updateUser(user,id).orElseThrow(() -> new UserException(id));
         return ResponseEntity.ok(updateUser);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") String id){
-        User user = userServices.getById(id).orElseThrow(()->new UserException(id));
         userServices.deleteUser(id);
         return ResponseEntity.ok().build();
     }
