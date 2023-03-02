@@ -18,16 +18,16 @@ public class User {
 
     private String passwordHash;
 
-    public User(String id, String name, String mail, String phone, byte age, String nationality, char sex, String passwordHash) {
-        this.id = id;
-        this.name = name;
-        this.mail = mail;
-        this.phone = phone;
-        this.age = age;
-        this.nationality = nationality;
-        this.sex = sex;
-        this.passwordHash = passwordHash;
-        passwordHash = BCrypt.hashpw( passwordHash, BCrypt.gensalt() );
+
+    public User(UserDto userDto){
+        this.mail = userDto.getMail();
+        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
+        this.name = userDto.getName();
+        this.phone = userDto.getPhone();
+        this.age = userDto.getAge();
+        this.nationality = userDto.getNationality();
+        this.sex = userDto.getSex();
+
     }
 
     public User() {
@@ -89,15 +89,17 @@ public class User {
         this.sex = sex;
     }
 
-    public void update(User user){
-        this.name = user.getName();
-        this.mail = user.getMail();
-        this.phone = user.getPhone();
-        this.sex = user.getSex();
-        if ( this.getPasswordHash() != null )
-        {
-            this.passwordHash = BCrypt.hashpw( this.getPasswordHash(), BCrypt.gensalt() );
+    public void update(UserDto userDto){
+        this.mail = userDto.getMail();
+        this.name = userDto.getName();
+        this.phone = userDto.getPhone();
+        this.age = userDto.getAge();
+        this.nationality = userDto.getNationality();
+        this.sex = userDto.getSex();
+        if ( userDto.getPassword() != null ){
+            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
         }
+
     }
 
     public String getPasswordHash() {
