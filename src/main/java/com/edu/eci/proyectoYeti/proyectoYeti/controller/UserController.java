@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("v1/users")
 public class UserController {
 
     @Autowired
