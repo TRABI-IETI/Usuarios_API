@@ -11,8 +11,8 @@ public class UserDto {
     private String nationality;
     private char sex;
     private String password;
-
-    private ArrayList<String> ActivePackages;
+    private char role;
+    private ArrayList<String> packages;
 
     public UserDto() {
     }
@@ -45,5 +45,9 @@ public class UserDto {
         return password;
     }
 
-    public ArrayList<String> getPackages(){return ActivePackages;}
+    public ArrayList<String> getPackages(){return packages;}
+
+    public char getRole() {
+        return role;
+    }
 }

@@ -20,8 +20,18 @@ public class User {
     private String nationality;
     private char sex;
     private String passwordHash;
-//    List<RoleEnum> roles;
-    private ArrayList<String> ActivePackages = new ArrayList<>();
+    private char role;
+
+    public char getRole() {
+        return role;
+    }
+
+    public void setRole(char role) {
+        this.role = role;
+    }
+
+    //    List<RoleEnum> roles;
+    private ArrayList<String> packages = new ArrayList<>();
 
 
     public User(UserDto userDto){
@@ -33,7 +43,8 @@ public class User {
         this.age = userDto.getAge();
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
-        this.ActivePackages = userDto.getPackages();
+        this.packages = userDto.getPackages();
+        this.role = userDto.getRole();
 //        this.roles = new ArrayList<>( Collections.singleton( RoleEnum.USER ) );
 
     }
@@ -66,11 +77,11 @@ public class User {
     }
 
     public ArrayList<String> getPackages() {
-        return ActivePackages;
+        return packages;
     }
 
     public void setPackages(ArrayList<String> packages) {
-        ActivePackages = packages;
+        packages = packages;
     }
 
     public String getPhone() {
@@ -116,8 +127,9 @@ public class User {
         this.age = userDto.getAge();
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
-        this.ActivePackages = userDto.getPackages();
+        this.packages = userDto.getPackages();
         this.passwordHash = userDto.getPassword();
+        this.role = userDto.getRole();
 //        if ( userDto.getPassword() != null ){
 ////            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
 //        }
@@ -133,10 +145,10 @@ public class User {
     }
 
     public void addPackage(String paquete) {
-        this.ActivePackages.add(paquete);
+        this.packages.add(paquete);
     }
 
     public void DeletePackage(String paquete) {
-        this.ActivePackages.remove(paquete);
+        this.packages.remove(paquete);
     }
 }
