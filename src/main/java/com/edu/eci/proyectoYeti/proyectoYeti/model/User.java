@@ -27,6 +27,7 @@ public class User {
     public User(UserDto userDto){
         this.mail = userDto.getMail();
 //        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
+        this.passwordHash = userDto.getPassword();
         this.name = userDto.getName();
         this.phone = userDto.getPhone();
         this.age = userDto.getAge();
@@ -116,6 +117,7 @@ public class User {
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
         this.ActivePackages = userDto.getPackages();
+        this.passwordHash = userDto.getPassword();
 //        if ( userDto.getPassword() != null ){
 ////            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
 //        }

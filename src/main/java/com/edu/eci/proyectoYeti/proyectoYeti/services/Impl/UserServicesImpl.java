@@ -78,4 +78,15 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+    @Override
+    public Optional<User> login(String user, String password) {
+       List<User> usuarios = userRepository.findAll();
+        for (User usuario: usuarios) {
+            if(Objects.equals(usuario.getMail(), user) && Objects.equals(usuario.getPasswordHash(), password)){
+                return Optional.ofNullable(userRepository.findById(usuario.getId()).orElseThrow(()-> new UserException(usuario.getId())));
+            }
+        }
+        return Optional.empty();
+    }
+
 }

@@ -58,4 +58,9 @@ public class UserController {
         userServices.deleteUser(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("{username}/{password}")
+    public ResponseEntity<?> login(@PathVariable("username") String user, @PathVariable("password") String password){
+        return ResponseEntity.ok(userServices.login(user, password));
+    }
 }

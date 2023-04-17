@@ -20,4 +20,6 @@ public interface UserServices {
     Optional<User> addPackage(String id, String paquete);
 
     Optional<User> DeletePackage(String id, String paquete);
+
+    Optional<User> login(String user, String password);
 }
