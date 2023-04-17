@@ -16,4 +16,8 @@ public interface UserServices {
     Optional<User> updateUser(UserDto user, String id);
 
     void deleteUser(String id);
+
+    Optional<User> addPackage(String id, String paquete);
+
+    Optional<User> DeletePackage(String id, String paquete);
 }

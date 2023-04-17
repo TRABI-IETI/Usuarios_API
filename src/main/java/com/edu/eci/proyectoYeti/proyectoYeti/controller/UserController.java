@@ -31,17 +31,26 @@ public class UserController {
     }
 
     @PostMapping
-    @RolesAllowed("ADMIN")
     public ResponseEntity<?> createUser(@RequestBody UserDto user){
         User newUser = userServices.saveUser(user);
         URI createUserURI = URI.create("");
         return ResponseEntity.created(createUserURI).body(newUser);
     }
 
+    @PostMapping("{id}/{package}")
+    public ResponseEntity<?> addPackage(@PathVariable("id") String id,  @PathVariable("package") String paquete ){
+        return ResponseEntity.ok(userServices.addPackage(id, paquete));
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<?> updateUser(@RequestBody UserDto user, @PathVariable("id") String id){
         User updateUser = userServices.updateUser(user,id).orElseThrow(() -> new UserException(id));
         return ResponseEntity.ok(updateUser);
+    }
+
+    @DeleteMapping("{id}/{package}")
+    public ResponseEntity<?> deletePackage(@PathVariable("id") String id,  @PathVariable("package") String paquete ){
+        return ResponseEntity.ok(userServices.DeletePackage(id, paquete));
     }
 
     @DeleteMapping("{id}")
