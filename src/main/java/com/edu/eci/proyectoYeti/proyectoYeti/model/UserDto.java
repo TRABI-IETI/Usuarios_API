@@ -1,5 +1,7 @@
 package com.edu.eci.proyectoYeti.proyectoYeti.model;
 
+import java.util.ArrayList;
+
 public class UserDto {
 
     private String name;
@@ -9,6 +11,8 @@ public class UserDto {
     private String nationality;
     private char sex;
     private String password;
+
+    private ArrayList<String> ActivePackages;
 
     public UserDto() {
     }
@@ -40,4 +44,6 @@ public class UserDto {
     public String getPassword() {
         return password;
     }
+
+    public ArrayList<String> getPackages(){return ActivePackages;}
 }

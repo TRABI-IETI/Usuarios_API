@@ -2,7 +2,7 @@ package com.edu.eci.proyectoYeti.proyectoYeti.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+//import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,16 +21,18 @@ public class User {
     private char sex;
     private String passwordHash;
 //    List<RoleEnum> roles;
+    private ArrayList<String> ActivePackages = new ArrayList<>();
 
 
     public User(UserDto userDto){
         this.mail = userDto.getMail();
-        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
+//        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
         this.name = userDto.getName();
         this.phone = userDto.getPhone();
         this.age = userDto.getAge();
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
+        this.ActivePackages = userDto.getPackages();
 //        this.roles = new ArrayList<>( Collections.singleton( RoleEnum.USER ) );
 
     }
@@ -60,6 +62,14 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public ArrayList<String> getPackages() {
+        return ActivePackages;
+    }
+
+    public void setPackages(ArrayList<String> packages) {
+        ActivePackages = packages;
     }
 
     public String getPhone() {
@@ -105,9 +115,10 @@ public class User {
         this.age = userDto.getAge();
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
-        if ( userDto.getPassword() != null ){
-            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
-        }
+        this.ActivePackages = userDto.getPackages();
+//        if ( userDto.getPassword() != null ){
+////            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
+//        }
 
     }
 
@@ -117,5 +128,13 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public void addPackage(String paquete) {
+        this.ActivePackages.add(paquete);
+    }
+
+    public void DeletePackage(String paquete) {
+        this.ActivePackages.remove(paquete);
     }
 }

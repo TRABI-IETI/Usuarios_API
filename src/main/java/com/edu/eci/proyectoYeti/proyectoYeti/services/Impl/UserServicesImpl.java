@@ -54,4 +54,28 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+    @Override
+    public Optional<User> addPackage(String id, String paquete) {
+        if(userRepository.existsById(id)){
+        Optional<User> odlUser = userRepository.findById(id);
+        odlUser.get().addPackage(paquete);
+        userRepository.save(odlUser.get());
+        return userRepository.findById(id);
+        }else {
+            throw new UserException(id);
+        }
+    }
+
+    @Override
+    public Optional<User> DeletePackage(String id, String paquete) {
+        if(userRepository.existsById(id)){
+            Optional<User> odlUser = userRepository.findById(id);
+            odlUser.get().DeletePackage(paquete);
+            userRepository.save(odlUser.get());
+            return userRepository.findById(id);
+        }else {
+            throw new UserException(id);
+        }
+    }
+
 }
