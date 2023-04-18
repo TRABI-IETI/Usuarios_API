@@ -10,7 +10,7 @@ public class UserDto {
     private byte age;
     private String nationality;
     private char sex;
-    private String password;
+    private String passwordHash;
     private char role;
     private ArrayList<String> packages;
 
@@ -41,8 +41,8 @@ public class UserDto {
         return sex;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     public ArrayList<String> getPackages(){return packages;}

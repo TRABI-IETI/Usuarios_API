@@ -37,7 +37,7 @@ public class User {
     public User(UserDto userDto){
         this.mail = userDto.getMail();
 //        this.passwordHash = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt() );
-        this.passwordHash = userDto.getPassword();
+        this.passwordHash = userDto.getPasswordHash();
         this.name = userDto.getName();
         this.phone = userDto.getPhone();
         this.age = userDto.getAge();
@@ -128,7 +128,7 @@ public class User {
         this.nationality = userDto.getNationality();
         this.sex = userDto.getSex();
         this.packages = userDto.getPackages();
-        this.passwordHash = userDto.getPassword();
+        this.passwordHash = userDto.getPasswordHash();
         this.role = userDto.getRole();
 //        if ( userDto.getPassword() != null ){
 ////            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
